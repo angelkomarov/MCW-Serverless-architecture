@@ -34,6 +34,9 @@ namespace TollBooth
             return cloudBlob.Name;
         }
 
+        //!!AK1
+        // Triggered by HTTP requests sent to it from Event Grid (upon receiving event from tollboothstorageak - storage account BLOB storage). 
+        //This request is the result of an Event subscription for the Function, subscribing to "blob-created" events
         [FunctionName("ProcessImage")]
         public static async Task Run([EventGridTrigger]EventGridEvent eventGridEvent,
             [Blob(blobPath: "{data.url}", access: FileAccess.Read,
@@ -60,10 +63,11 @@ namespace TollBooth
                         licensePlateImage = br.ReadBytes((int)incomingPlate.Length);
                     }
 
+                    //!!AK1.1 calling Cognitive services Computer Vision
                     // **TODO 1: Set the licensePlateText value by awaiting a new FindLicensePlateText.GetLicensePlate method.**
                     licensePlateText = await new FindLicensePlateText(log, _client).GetLicensePlate(licensePlateImage);
 
-                    
+                    //!!AK1.2
                     // Send the details to Event Grid.
                     await new SendToEventGrid(log, _client).SendLicensePlateData(new LicensePlateData()
                     {

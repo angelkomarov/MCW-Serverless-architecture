@@ -27,13 +27,13 @@ namespace TollBooth
             // Will send to one of two routes, depending on success.
             // Event listeners will filter and act on events they need to
             // process (save to database, move to manual checkup queue, etc.)
-            if (data.LicensePlateFound)
+            if (data.LicensePlateFound) //!!AK1.1.1-send valid plates back to event grid
             {
                 // TODO 3: Modify send method to include the proper eventType name value for saving plate data.
                 // COMPLETE: await Send(...);
                 await Send("savePlateData", "TollBooth/CustomerService", data);
             }
-            else
+            else //!!AK1.1.2-send invalid plates back to event grid
             {
                 // TODO 4: Modify send method to include the proper eventType name value for queuing plate for manual review.
                 // COMPLETE: await Send(...);

@@ -42,7 +42,7 @@ namespace TollBooth
             var licensePlate = string.Empty;
             // Request parameters.
             const string requestParameters = "language=unk&detectOrientation=true";
-            // Get the API URL and the API key from settings.
+            // Get the API URL and the API key from settings.- these are KEY VALT secrets!
             // TODO 2: Populate the below two variables with the correct AppSettings properties.
             //var uriBase = Environment.GetEnvironmentVariable("");
             //var apiKey = Environment.GetEnvironmentVariable("");
@@ -51,6 +51,7 @@ namespace TollBooth
 
             var resiliencyStrategy = DefineAndRetrieveResiliencyStrategy();
 
+            //!!AK1.1.1 calling Cognitive services Computer Vision
             // Configure the HttpClient request headers.
             try
             {
